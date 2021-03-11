@@ -1,0 +1,10 @@
+name: VisualizingBubble
+author: Tristian
+version: 1.0.0
+main: com.tristian.bubble.VisualizingBubbleSort
+description: bru
+commands:
+  bubblesort:
+    description: []
+  sort:
+    description: []
