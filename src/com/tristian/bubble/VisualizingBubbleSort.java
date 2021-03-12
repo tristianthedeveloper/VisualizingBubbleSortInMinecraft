@@ -1,6 +1,6 @@
 package com.tristian.bubble;
 
-import com.tristian.bubble.listeners.HoloListener;
+import com.tristian.bubble.listeners.SortListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -17,7 +17,7 @@ public class VisualizingBubbleSort extends JavaPlugin {
 
         getCommand("bubblesort").setExecutor(new BubbleSortCommand());
         getCommand("sort").setExecutor(new SortStarterCommand());
-        Bukkit.getPluginManager().registerEvents(new HoloListener(), this);
+        Bukkit.getPluginManager().registerEvents(new SortListener(), this);
         instance = this;
 
     }
@@ -25,7 +25,7 @@ public class VisualizingBubbleSort extends JavaPlugin {
 
     public void run(Player p) {
         s = Sorter.getInstance();
-        s.setUpEntityMap(p.getLocation());
+        s.setUpEntityMap(p, p.getLocation());
 
         p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a&l(!) &aMap set up, /sort to sort"));
     }

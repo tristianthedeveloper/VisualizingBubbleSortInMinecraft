@@ -5,6 +5,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.Vector;
 
@@ -32,7 +35,7 @@ public class Sorter {
         return instance;
     }
 
-    public void setUpEntityMap(Location starting) {
+    public void setUpEntityMap(Player player, Location starting) {
 
         Vector direction = starting.getDirection();
 
@@ -51,23 +54,23 @@ public class Sorter {
             k++;
         }
 
+        ItemStack start = SkullUtil.getCustomSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTVmODkyNGYzMTZhMDBhOWI4MDYxMjQ5YzA4NTEzYjBjYzM3ZGQ2ZmEzMTBkMDVlMzhmM2Q5YzZiODJjZjBkYiJ9fX0=");
+        ItemMeta meta = start.getItemMeta();
+        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l(!) &aSort!"));
+        start.setItemMeta(meta);
 
-        ArmorStand buttonStand = (ArmorStand) twoBlocksInFront.getWorld().spawnEntity(twoBlocksInFront.clone().add(-k / 2, 2, 0), EntityType.ARMOR_STAND);
-        buttonStand.setVisible(false);
-        buttonStand.setHelmet(SkullUtil.getCustomSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTVmODkyNGYzMTZhMDBhOWI4MDYxMjQ5YzA4NTEzYjBjYzM3ZGQ2ZmEzMTBkMDVlMzhmM2Q5YzZiODJjZjBkYiJ9fX0="));
-        buttonStand.setGravity(false);
-        buttonStand.setVelocity(new Vector(0, 0, 0));
 
-        ArmorStand textStand = (ArmorStand) twoBlocksInFront.getWorld().spawnEntity(twoBlocksInFront.clone().add(-k / 2, 2, 0), EntityType.ARMOR_STAND);
-        textStand.setVisible(false);
-        textStand.setGravity(false);
-        textStand.setVelocity(new Vector(0, 0, 0));
-        textStand.setCustomName(ChatColor.translateAlternateColorCodes('&', "&a&lSort!"));
-        textStand.setCustomNameVisible(true);
-        textStand.setMetadata("start", new FixedMetadataValue(VisualizingBubbleSort.getInstance(), true));
-        buttonStand.setMetadata("start", new FixedMetadataValue(VisualizingBubbleSort.getInstance(), true));
-        buttons.add(textStand);
-        buttons.add(buttonStand);
+        ItemStack reset = SkullUtil.getCustomSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODY1Mjg2ZTNlNmZhMDBlNGE2MGJiODk2NzViOWFhNzVkNmM5Y2RkMWVjODQwZDFiY2MyOTZiNzFjOTJmOWU0MyJ9fX0=");
+        ItemMeta resetMeta = reset.getItemMeta();
+        resetMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&c&l(!) &cReset and generate new array!"));
+
+        reset.setItemMeta(resetMeta);
+
+
+        player.getInventory().setItem(0, start);
+        player.getInventory().setItem(8, reset);
+
+
 
     }
 
